@@ -144,4 +144,26 @@ namespace Patrones_de_diseño.Singleton
         }
             
     }
+
+    public sealed class delegateSingletonLazyload {
+        //Custom Delegate
+        delegate delegateSingletonLazyload SingletonDelegateWithNoParameter();
+        static SingletonDelegateWithNoParameter Del = MakeSingletonInstance;
+        //Built-in Func<out-result> Delegate.
+        // Very important for lazy loading: lazy loading can be used with delegates built-in functions.
+        static Func<delegateSingletonLazyload> myFuncDelegate = MakeSingletonInstance;
+        private static readonly Lazy<delegateSingletonLazyload> Instance = new Lazy<delegateSingletonLazyload>( 
+            //Del() // Using Custom Delegate.
+            myFuncDelegate() // Built-in Delegate.
+            //()=> new delegateSingletonLazyload() //Lamda.
+            )
+        ;
+
+        private static delegateSingletonLazyload MakeSingletonInstance() {
+            return new delegateSingletonLazyload();
+        }
+        private delegateSingletonLazyload() { }
+
+        public static delegateSingletonLazyload GetInstance => Instance.Value;
+    }
 }

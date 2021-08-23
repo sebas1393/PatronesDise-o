@@ -90,6 +90,8 @@ namespace Patrones_de_diseño
                                   "        En un ambiente multihilos");
                 Console.WriteLine("     5- Lock antes de validar el objeto, no se recomienta esta práctica ya que el uso de la \n" +
                                   "        memoria es más costoso");
+
+                Console.WriteLine(" 6- Singleton con delegados");
                 //Lee la opción del usuario
                 _ = int.TryParse(Console.ReadLine(), out singletonType);
 
